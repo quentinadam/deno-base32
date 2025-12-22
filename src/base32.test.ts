@@ -1,6 +1,4 @@
 import assert from '@quentinadam/assert';
-import * as hex from '@quentinadam/hex';
-import * as Uint8ArrayExtension from '@quentinadam/uint8array-extension';
 import * as base32 from '../src/base32.ts';
 
 const vectors = [
@@ -25,25 +23,25 @@ const vectors = [
     alphabet: undefined,
   },
   {
-    decoded: hex.decode('00443214c74254b635cf84653a56d7c675be77df'),
+    decoded: Uint8Array.fromHex('00443214c74254b635cf84653a56d7c675be77df'),
     encoded: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',
   },
   {
-    decoded: hex.decode('00443214c74254b635cf84653a56d7c675be77df00'),
+    decoded: Uint8Array.fromHex('00443214c74254b635cf84653a56d7c675be77df00'),
     encoded: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567AA======',
   },
   {
-    decoded: hex.decode('00443214c74254b635cf84653a56d7c675be77df'),
+    decoded: Uint8Array.fromHex('00443214c74254b635cf84653a56d7c675be77df'),
     encoded: 'BCDEFGHIJKLMNOPQRSTUVWXYZ234567A',
     alphabet: 'BCDEFGHIJKLMNOPQRSTUVWXYZ234567A',
   },
   {
-    decoded: hex.decode('00443214c74254b635cf84653a56d7c675be77df00'),
+    decoded: Uint8Array.fromHex('00443214c74254b635cf84653a56d7c675be77df00'),
     encoded: 'BCDEFGHIJKLMNOPQRSTUVWXYZ234567ABB======',
     alphabet: 'BCDEFGHIJKLMNOPQRSTUVWXYZ234567A',
   },
   {
-    decoded: hex.decode('00443214c74254b635cf84653a56d7c675be77df00'),
+    decoded: Uint8Array.fromHex('00443214c74254b635cf84653a56d7c675be77df00'),
     encoded: 'BCDEFGHIJKLMNOPQRSTUVWXYZ234567ABB******',
     alphabet: 'BCDEFGHIJKLMNOPQRSTUVWXYZ234567A*',
   },
@@ -65,8 +63,8 @@ Deno.test('decode', () => {
     } else {
       const result = base32.decode(encoded, { alphabet });
       assert(
-        Uint8ArrayExtension.equals(result, decoded),
-        `Expected [${hex.encode(decoded)}] but got [${hex.encode(result)}]`,
+        result.toHex() === decoded.toHex(),
+        `Expected [${decoded.toHex()}] but got [${result.toHex()}]`,
       );
     }
   }
