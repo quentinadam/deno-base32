@@ -1,5 +1,5 @@
 import { assert } from '@quentinadam/assert';
-import * as base32 from '../src/base32.ts';
+import * as base32 from './base32.ts';
 
 const vectors = [
   { decoded: '', encoded: '' },
