@@ -1,4 +1,4 @@
-import assert from '@quentinadam/assert';
+import { assert } from '@quentinadam/assert';
 import * as base32 from '../src/base32.ts';
 
 const vectors = [
